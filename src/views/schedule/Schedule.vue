@@ -1,0 +1,25 @@
+<template>
+<Header title='代办'>
+     <el-icon  color="#2d8cf0" size="25"><Search /></el-icon>
+</Header>
+<Schedule :tabList="tabList"  :flag="true" :scheduleList="scheduleList" />
+ 
+</template>
+
+<script setup>
+import { Search} from '@element-plus/icons-vue'
+import Schedule from './index.vue'
+import { getScheduleList } from '@api/home.js'
+import { onMounted, ref } from 'vue'
+let scheduleList = ref([])
+const tabList = ref(['代办', '已办', '完成'])
+onMounted(() => {
+  getScheduleList().then((res) => {
+    scheduleList.value =  res.data.data.data
+  })
+})
+</script>
+
+<style lang="scss" scoped>
+
+</style>
